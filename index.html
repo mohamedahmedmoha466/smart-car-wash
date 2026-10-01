@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bayflow | Smart wash operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-role="admin">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">B</span><span>bayflow</span></div>
+      <div class="site-switcher"><span class="status-dot"></span>
+        <div><strong>Northpoint bay</strong><small>Live operations</small></div><span class="chevron">⌄</span>
+      </div>
+      <nav>
+        <p class="nav-label">Workspace</p>
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">◉</span>Overview</button>
+        <button class="nav-item" data-view="bookings"><span class="nav-icon">▣</span>Bookings <b
+            class="nav-count">4</b></button>
+        <button class="nav-item" data-view="arrivals"><span class="nav-icon">⌁</span>Arrivals <b
+            class="nav-count alert-count">2</b></button>
+        <button class="nav-item" data-view="customers"><span class="nav-icon">♙</span>Customers</button>
+        <p class="nav-label second">Manage</p>
+        <button class="nav-item" data-view="analytics"><span class="nav-icon">↗</span>Analytics</button>
+        <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span>Settings</button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="avatar">MAM</div>
+        <div><strong>Mohamed Ahmed Mohamed</strong><small>Administrator · booking database owner</small></div><span
+          class="more">•••</span>
+      </div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb">Operations <span>/</span> <strong id="page-title">Overview</strong></div>
+        <div class="top-actions"><span class="last-sync"><i></i>Synced just now</span><button class="icon-button"
+            aria-label="Notifications">♢<b></b></button>
+          <div class="top-avatar">MAM</div>
+        </div>
+      </header>
+      <section class="page-wrap">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow" id="today-date-label">Monday, 14 October 2024</p>
+            <h1>mazdam car wash
+              <span>✦</span>
+            </h1>
+            <p class="subheading">Here’s what’s moving through Northpoint today.</p>
+          </div><button class="primary-button" id="new-booking"><span>＋</span> New booking</button>
+        </div>
+        <div class="metric-grid">
+          <article class="metric-card accent-blue">
+            <div class="metric-top"><span>Today’s bookings</span><span class="metric-icon">▦</span></div><strong
+              id="booking-total">24</strong>
+            <div class="metric-foot"><span class="trend up">↗ 12%</span><span>vs. last Monday</span></div>
+          </article>
+          <article class="metric-card accent-green">
+            <div class="metric-top"><span>Cars in queue</span><span class="metric-icon">≋</span></div><strong
+              id="queue-total">03</strong>
+            <div class="metric-foot"><span class="trend neutral">● steady</span><span>~18 min wait</span></div>
+          </article>
+          <article class="metric-card accent-yellow">
+            <div class="metric-top"><span>Completed</span><span class="metric-icon">✓</span></div><strong
+              id="completed-total">17</strong>
+            <div class="metric-foot"><span class="trend up">↗ 8%</span><span>vs. last Monday</span></div>
+          </article>
+          <article class="metric-card accent-red">
+            <div class="metric-top"><span>Needs attention</span><span class="metric-icon">!</span></div><strong
+              id="attention-total">02</strong>
+            <div class="metric-foot"><span class="trend down">● Review</span><span>staff alerts</span></div>
+          </article>
+        </div>
+        <div class="content-grid">
+          <section class="panel queue-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Live wash queue</h2>
+                <p>Updated automatically from entrance camera</p>
+              </div><button class="text-button" data-view="arrivals">View all <span>→</span></button>
+            </div>
+            <div class="queue-list" id="queue-list"></div>
+          </section>
+          <section class="panel arrival-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Arrival detection</h2>
+                <p>ANPR camera · Entrance A</p>
+              </div><span class="live-pill"><i></i> Live</span>
+            </div>
+            <div class="camera-box">
+              <div class="scan-lines"></div><span class="camera-label">CAM / 01</span>
+              <div class="plate-read">NPT <b>4821</b></div><span class="camera-time">10:42:18</span>
+            </div>
+            <div class="detection-result">
+              <div class="plate-thumbnail">NPT<br><b>4821</b></div>
+              <div><strong>Plate recognised</strong>
+                <p>Matched to booking <b>#BK-1042</b></p>
+              </div><span class="match-tag">MATCHED</span>
+            </div><button class="secondary-button full-width" id="simulate-arrival">Simulate plate scan
+              <span>⌁</span></button>
+          </section>
+        </div>
+        <div class="lower-grid">
+          <section class="panel table-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Today’s bookings</h2>
+                <p>Manage appointments and check-in status</p>
+              </div>
+              <div class="table-tools"><button class="filter-button">All statuses⌄</button><button
+                  class="icon-button small" id="clear-bookings" aria-label="Clear admin booking database"
+                  title="Clear admin booking database">⋮</button></div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>BOOKING</th>
+                    <th>PLATE</th>
+                    <th>TIME SLOT</th>
+                    <th>WASH TYPE</th>
+                    <th>STATUS</th>
+                    <th>PAYMENT</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="booking-table"></tbody>
+              </table>
+            </div>
+          </section>
+          <aside class="panel alerts-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Staff alerts <span class="alert-badge">2</span></h2>
+                <p>Requires your attention</p>
+              </div><button class="text-button">Clear all</button>
+            </div>
+            <div class="alert-list">
+              <div class="alert-item"><span class="alert-symbol red">!</span>
+                <div><strong>Arrival outside slot</strong>
+                  <p><b>LMN 2098</b> arrived 24 min early</p><small>2 min ago</small>
+                </div><button class="close-alert">×</button>
+              </div>
+              <div class="alert-item"><span class="alert-symbol yellow">!</span>
+                <div><strong>Check-in needed</strong>
+                  <p><b>Walk-in · QRS 7712</b> needs registration</p><small>8 min ago</small>
+                </div><button class="close-alert">×</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <section class="panel payment-banner" aria-label="Payment methods accepted">
+          <div class="panel-heading compact">
+            <div>
+              <h2>Accepted payments</h2>
+              <p>Choose the method that works best for your wash.</p>
+            </div>
+          </div>
+          <div class="payment-logos">
+            <div class="payment-item mpesa">
+              <span class="payment-mark">M</span>
+              <span>M-Pesa</span>
+            </div>
+            <div class="payment-item visa">
+              <span class="payment-mark">V</span>
+              <span>Visa</span>
+            </div>
+            <div class="payment-item mastercard">
+              <span class="payment-mark">MC</span>
+              <span>MasterCard</span>
+            </div>
+            <div class="payment-item paypal">
+              <span class="payment-mark">P</span>
+              <span>PayPal</span>
+            </div>
+            <div class="payment-item binance">
+              <span class="payment-mark">B</span>
+              <span>Binance</span>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <dialog id="booking-modal">
+    <form method="dialog" id="booking-form">
+      <div class="modal-heading">
+        <div>
+          <p class="eyebrow">Customer intake</p>
+          <h2>Create a booking</h2>
+        </div><button class="modal-close" value="cancel">×</button>
+      </div><label>Customer name<input id="customer-input" required placeholder="e.g. Maya Chen"
+          maxlength="60"></label><label>Plate number<input id="plate-input" required placeholder="e.g. NPT 4821"
+          maxlength="8"></label><label>Booking date<input id="date-input" type="date" required></label><label>Preferred
+        time<select id="time-input" required>
+          <option>09:00 – 09:30</option>
+          <option>09:30 – 10:00</option>
+          <option>10:00 – 10:30</option>
+          <option>10:30 – 11:00</option>
+          <option>11:00 – 11:30</option>
+          <option>11:30 – 12:00</option>
+          <option>12:00 – 12:30</option>
+          <option>12:30 – 13:00</option>
+          <option>13:00 – 13:30</option>
+          <option>13:30 – 14:00</option>
+          <option>14:00 – 14:30</option>
+          <option>14:30 – 15:00</option>
+        </select></label><label>Wash type<select id="wash-input" required>
+          <option>Full detail</option>
+          <option>Express exterior</option>
+          <option>Interior refresh</option>
+        </select></label><label>Booking status<select id="status-input" required>
+          <option selected>Scheduled</option>
+          <option>Pending</option>
+          <option>Confirmed</option>
+          <option>Completed</option>
+        </select></label><label>Payment method<select id="payment-input">
+          <option selected>Pending</option>
+          <option>M-Pesa</option>
+          <option>Visa card</option>
+          <option>MasterCard</option>
+          <option>PayPal</option>
+          <option>Binance</option>
+        </select></label><button class="primary-button full-width" value="default">Save booking <span>→</span></button>
+    </form>
+  </dialog>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+
+</html>
